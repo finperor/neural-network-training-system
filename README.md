@@ -148,18 +148,6 @@ CSV 文件第一行为列名（变量名称），后续每行为一个时间点�
 ...
 ```
 
-## 已修复的问题（v1.1）
-
-| 问题 | 原因 | 修复 |
-|------|------|------|
-| 启动即崩溃 | 4 个核心模块为空文件 | 实现了 DataLoader/DataPreprocessor/DatasetSplitter/神经网络模型 |
-| 加载数据后闪退 | `on_data_ready` 调用不存在的 `set_data_info` 方法 | 改为调用 `set_data` |
-| 切换模型类型出现重影 | `deleteLater()` 不立即删除旧控件 | 新增 `clear_config_layout()` 先 hide() 再 deleteLater() |
-| 训练监控始终显示"等待训练" | `train_one_epoch()`/`validate()` 不追加损失列表 | 在 `update_training()` 中手动追加 |
-| 训练时 drawLine 报错 | 除法产生 float 坐标 | 网格线 y 坐标显式转为 int() |
-| 最终验证损失显示 inf | 逐轮模式未更新 `best_val_loss` | 每轮比较并更新最佳损失与模型状态 |
-| 回归任务显示分类指标 | 评估器只匹配英文 "regression" | 增加中文 "回归" 匹配，兼容中英文任务类型 |
-| Windows 路径显示异常 | 路径分隔符硬编码 "/" | 改用 `os.path.basename()` |
 
 ## 注意事项
 
